@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  cassandra:
+    image: cassandra
+    ports:
+      - 9042:9042
+    volumes:
+      - "C:/Cassandra/ProjectBigData/data:/var/lib/cassandra"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=myCluster
