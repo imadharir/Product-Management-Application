@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Additional CSS or styles if needed -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -20,6 +19,7 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Category</th>
+                    <th>Image</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -30,6 +30,9 @@
                         <td>{{ product.name }}</td>
                         <td>${{ product.price }}</td>
                         <td>{{ product.category }}</td>
+                        <td>
+                            <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                        </td>
                         <td>
                             <a href="{{ url_for('product_detail', product_id=product.product_id) }}" class="btn btn-info btn-sm">Details</a>
                             <a href="{{ url_for('update_product_route', product_id=product.product_id) }}" class="btn btn-warning btn-sm">Update</a>
@@ -46,10 +49,8 @@
             <button type="submit" class="btn btn-success">Add Product</button>
         </form>
     </div>
-    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXOTD95QFAHQDr/H6V9LsIbrZtMz+cB6Ml9M" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-MCw98/SFnGE8fJT3ieYLPpZs7np1L8+cY9it99geDKeA9cNTl8EAPUHgRvbYI5O8" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- Additional scripts if needed -->
 </body>
 </html>
