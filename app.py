@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
 from cassandra.cluster import Cluster
@@ -48,6 +48,16 @@ def add_product(name, price, category, image):
         (product_id, name, price, category, f"images/{product_id}_resized.jpg")
     )
 
+    # Insert into categories table (if it doesn't exist)
+    session.execute(
+        """
+        INSERT INTO categories (category)
+        VALUES (%s)
+        IF NOT EXISTS
+        """,
+        (category,)
+    )
+
     print(f"Product added: {name}")
     close_connection(cluster)
 
@@ -83,9 +93,29 @@ def delete_product(session, product_id):
     except Exception as e:
         print(f"Error deleting product: {e}")
 
+def get_all_categories():
+    cluster = Cluster(['localhost'])
+    session = cluster.connect('mykeyspace')
+
+    result = session.execute("SELECT * FROM categories")
+    categories = [row.category for row in result]
+
+    cluster.shutdown()
+
+    return categories
+
+
 @app.route('/')
 def index():
+    cluster, session = connect_to_cassandra()
+
     products = get_all_products()
+
+    #result = session.execute("SELECT category FROM categories")
+    #categories = [row.category for row in result]
+
+    #print("Categories:", categories)
+
     return render_template('index.html', products=products)
 
 @app.route('/product/<int:product_id>')
@@ -145,6 +175,11 @@ def delete_product_route(product_id):
     close_connection(cluster)
 
     return redirect(url_for('index'))
+
+@app.route('/categories', methods=['GET'])
+def get_categories():
+    categories = get_all_categories()
+    return jsonify(categories)
 
 if __name__ == '__main__':
     app.run(debug=True)

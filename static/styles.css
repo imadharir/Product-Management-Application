@@ -5,6 +5,14 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    /* For a background color */
+    background-color: #999999; /* Change to your preferred color */
+    /* background-image: url('your-background-image.jpg'); */
+    
+    /* Set background size and other properties as needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .container {
