@@ -8,7 +8,7 @@ app = Flask(__name__)
 Bootstrap(app)
 
 def connect_to_cassandra():
-    cluster = Cluster(['localhost'])
+    cluster = Cluster(['localhost'], port=9042)
     session = cluster.connect('mykeyspace')
     return cluster, session
 
@@ -36,7 +36,7 @@ def add_product(name, price, category, image):
         # Resize the image to a uniform size (e.g., 300x300 pixels)
         img.thumbnail((300, 300))
 
-        # Save the resized image to a new path
+        
         resized_image_path = f"static/images/{product_id}_resized.jpg"
         img.save(resized_image_path)
 
@@ -48,7 +48,6 @@ def add_product(name, price, category, image):
         (product_id, name, price, category, f"images/{product_id}_resized.jpg")
     )
 
-    # Insert into categories table (if it doesn't exist)
     session.execute(
         """
         INSERT INTO categories (category)
