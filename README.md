@@ -19,8 +19,8 @@ This project is a web application built using Flask that allows users to manage 
 ## 4. Installation Instructions
 1. **Clone the Repository:**
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/imadharir/Product-Management-Application.git
+   cd Product-Management-Application
    ```
 2. **Set Up a Virtual Environment:**
     ```bash
@@ -65,7 +65,19 @@ Visit `http://127.0.0.1:5000/` in your web browser to access the application.
 - **View Categories:** Access the categories through the `/categories` API endpoint.
 ## 7. API Endpoints
 **GET /categories**: Retrieve a list of all categories in JSON format.
-## 8. Future Improvements
+## 8. Screenshots
+![](list_products.png)
+<div align="center">
+    <hr style="width: 50%;"/>
+</div>
+
+![](add_product.png)
+<div align="center">
+    <hr style="width: 50%;"/>
+</div>
+
+![](product_details.png)
+## 9. Future Improvements
 - Implement user authentication and authorization.
 - Add search functionality for products.
 - Enhance error handling and validation.
